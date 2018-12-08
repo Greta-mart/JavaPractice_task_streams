@@ -5,9 +5,6 @@ import org.junit.Test;
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.LongStream;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class HometaskTest {
@@ -43,7 +40,9 @@ public class HometaskTest {
 
 		//Replace here
 		List<String> multipliedNumbersAsString = Collections.emptyList();
-
+		//multipliedNumbersAsString = Arrays.asList(numbers.stream()
+		//		.distinct()
+		//		.collect(Collectors.toList(i -> i * 2)).toString());
 		assertThat(multipliedNumbersAsString).contains("2", "4", "6", "8", "10");
 	}
 
@@ -91,7 +90,9 @@ public class HometaskTest {
 
 		//Replace here
 		Optional<BigDecimal> reduced = Optional.empty();
-	//	reduced = numbers.stream().reduce((x,y)->x*y);
+		reduced = numbers.stream()
+				.filter(a ->a.compareTo(BigDecimal.valueOf(0.00))>0)
+				.reduce((a,y)->a.multiply(y));
 
 		assertThat(reduced.isPresent()).isTrue();
 		assertThat(reduced.get()).isEqualByComparingTo("300");
@@ -109,6 +110,9 @@ public class HometaskTest {
 		//Replace here
 		Map<BlogPostType, List<BlogPost>> postsPerType = Collections.emptyMap();
 
+		postsPerType = posts.stream()
+				.collect(Collectors.groupingBy(BlogPost::getType));
+
 		assertThat(postsPerType.get(BlogPostType.NEWS).size()).isEqualTo(2);
 		assertThat(postsPerType.get(BlogPostType.GUIDE).size()).isEqualTo(1);
 		assertThat(postsPerType.get(BlogPostType.REVIEW).size()).isEqualTo(2);
@@ -125,6 +129,9 @@ public class HometaskTest {
 
 		//Replace here
 		Map<String, BlogPost> postPerTitle = Collections.emptyMap();
+
+		//postPerTitle = posts.stream()
+				//.collect(Collectors.toMap()
 
 		assertThat(postPerTitle.get("News item 1").getTitle()).isEqualTo("News item 1");
 		assertThat(postPerTitle.get("Tech review 1").getTitle()).isEqualTo("Tech review 1");
