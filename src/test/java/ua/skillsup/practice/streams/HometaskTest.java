@@ -14,7 +14,7 @@ public class HometaskTest {
 	public void shouldCountSumOfNumbersInTheList() throws Exception {
 		List<Integer> listOfNumbers = Arrays.asList(1, 2, 3, 4, 5);
 
-		long quantity;
+		long quantity = 0;
 		//Replace here
 		quantity = listOfNumbers.stream().mapToInt((s) -> (s)).sum();
 		assertThat(quantity).isEqualTo(15L);
@@ -25,7 +25,7 @@ public class HometaskTest {
 		List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
 
 		//Replace here
-		List<Integer> numbersGreaterThan5;// = Collections.emptyList();
+		List<Integer> numbersGreaterThan5 = Collections.emptyList();
 
 		numbersGreaterThan5 = numbers.stream()
 				.filter(a -> a > 5)
