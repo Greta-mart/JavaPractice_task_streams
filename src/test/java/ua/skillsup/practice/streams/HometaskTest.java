@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -40,9 +41,10 @@ public class HometaskTest {
 
 		//Replace here
 		List<String> multipliedNumbersAsString = Collections.emptyList();
-		//multipliedNumbersAsString = Arrays.asList(numbers.stream()
-		//		.distinct()
-		//		.collect(Collectors.toList(i -> i * 2)).toString());
+		multipliedNumbersAsString = numbers.stream()
+				.map(i -> i * 2)//
+				.map(i -> i.toString())//
+				.collect(Collectors.toList());
 		assertThat(multipliedNumbersAsString).contains("2", "4", "6", "8", "10");
 	}
 
@@ -130,8 +132,8 @@ public class HometaskTest {
 		//Replace here
 		Map<String, BlogPost> postPerTitle = Collections.emptyMap();
 
-		//postPerTitle = posts.stream()
-				//.collect(Collectors.toMap()
+		postPerTitle = posts.stream()
+				.collect(Collectors.toMap(BlogPost::getTitle, Function.identity()));
 
 		assertThat(postPerTitle.get("News item 1").getTitle()).isEqualTo("News item 1");
 		assertThat(postPerTitle.get("Tech review 1").getTitle()).isEqualTo("Tech review 1");
